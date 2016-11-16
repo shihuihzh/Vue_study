@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app1">
+		<span>{{message}}</span>
+	</div>
+
+	<div id="app2">
+		<span>{{message}}</span>
+	</div>
+
+</body>
+<script>
+
+	
+	
+
+
+	// ==== 属性
+	var data = {message:"hello"}
+	var vm = new Vue({
+		el:"#app1",
+		data: data
+	})
+
+	console.log(vm.$data === data)
+	console.log(vm.$el === document.getElementById("app1"))
+
+	// $watch 监控属性
+	vm.$watch("message", function(newVal, oldVal) {
+		alert(newVal);
+		alert(oldVal);
+	})
+
+
+	// ====== 生命周期
+	var vm2 = new Vue({
+		el:"#app2",
+		data: {
+			message: "生命周期"
+		},
+		beforeCreate: function() {
+			alert("beforeCreate")
+		}
+	})
+
+
+	
+
+</script>
+</html>

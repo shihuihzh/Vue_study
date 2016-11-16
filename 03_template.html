@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+	<div id="app1">
+		<span >{{a}}</span>
+		<span v-once>{{b}}</span>
+	</div>
+	<br>
+
+	<div id="app2">
+		<span v-html="rawHtml"></span>
+	</div>
+	<br>
+
+	<div id="app3">
+		<button v-bind:disabled="disabled">属性</button>
+	</div>
+	<br>
+
+	<div id="app4">
+		<span v-bind:id="'span-' + number">span</span>
+		<span>{{ number + 1 }}</span>
+		<span>{{ ok ? 'Yes' : 'No' }}</span>
+		<span>{{ message.split('').reverse().join('') }}</span>
+		<span>{{ message2 | capitalize("test")  }}</span>
+	</div>
+	<br>
+
+	<div id="app5">
+		<a v-bind:href="url">属性参数绑定</a>
+		<button v-on:click="doSomething">事件绑定</button>
+		<a :href="url">属性参数绑定2，缩写</a>
+		<button @click="doSomething">事件绑定，缩写</button>
+	</div>
+
+</body>
+<script>
+
+	// === 文本
+	var app1 = new Vue({
+		el: '#app1',
+		data: {
+			a: "Hello",
+			b: "World"	// v-once 修改不同步
+		}
+	})
+
+	// === html
+	var app2 = new Vue({
+		el: '#app2',
+		data: {
+			rawHtml: '<i>Hello</i>'
+		}
+	})
+
+	// === 属性
+	var app3 = new Vue({
+		el: '#app3',
+		data: {
+			disabled: true
+		}
+	})
+
+	// === 表达式，过滤器
+	var app4 = new Vue({
+		el: '#app4',
+		data: {
+			number: 1,
+			ok: true,
+			message: "Hello",
+			message2: "filter"
+		},
+		filters: {
+			capitalize: function(value, test) {
+				if (!value) return ''
+    			value = value.toString()
+    			console.log(test)
+    			return value.charAt(0).toUpperCase() + value.slice(1)
+			}
+		}
+	})
+
+	// === 指令,缩写
+	var app5 = new Vue({
+		el: "#app5",
+		data: {
+			url: "https://www.baidu.com"
+		},
+		methods: {
+			doSomething: function() {
+				alert("Hello World!");
+			}
+		}		
+	})
+
+
+
+
+	
+</script>
+</html>

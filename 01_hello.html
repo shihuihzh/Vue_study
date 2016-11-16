@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app">{{ message }}</div>
+	<hr>
+	<div id="app-2">
+		<span v-bind:title="message">Hover your mouse</span>
+	</div>
+	<hr>
+	<div id="app-3">
+		<p v-if="seen">Now you see me</p>
+	</div>
+	<hr>
+	<div id="app-4">
+		<ol>
+			<li v-for="todo in todos">{{todo.text}}</li>
+		</ol>
+	</div>
+	<hr>
+	<div id="app-5">
+		<p>{{message}}</p>
+		<button v-on:click="resverMe">Reverse Message</button>
+	</div>
+	<hr>
+	<div id="app-6">
+		<p>{{message}}</p>
+		<input type="text" v-model="message"></div>
+	<hr>
+	<div id="app-7">
+		<ul>
+			<todo-item v-for="grocery in groceryList" v-bind:todo="grocery"></todo-item>
+		</ul>
+	</div>
+</body>
+	<script>
+
+	// 声明式渲染1
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: 'Hello Vue'
+		}
+	})
+
+	// 声明式渲染2
+	var app2 = new Vue({
+		el: '#app-2',
+		data: {
+			message: 'You loaded this page on ' + new Date()
+		}	
+	})
+
+	// 条件渲染
+	var app3 = new Vue({
+		el: '#app-3',
+		data: {
+			seen: true
+		}
+	})
+
+	// 循环渲染
+	var app4 = new Vue({
+		el: '#app-4',
+		data: {
+			todos: [
+				{ text: 'Learn JavaScript' },
+	    		{ text: 'Learn Vue' },
+	    		{ text: 'Build something awesome' }
+			]
+		}
+	})
+
+	// 处理输入1
+	var app5 = new Vue({
+		el: '#app-5',
+		data: {
+			message: 'Hello Zhanhao!'
+		},
+		methods: {
+			resverMe: function() {
+				this.message = this.message.split('').reverse().join('');
+			}
+		}
+	})
+
+	// 处理输入2
+	var app6 = new Vue({
+		el: '#app-6',
+		data: {
+			message: 'Hello Vue!'
+		}
+	})
+
+	// 组件
+	Vue.component('todo-item', {
+		props:['todo'],
+		template: '<li>{{todo.text}}</li>'
+	})
+
+	var app7 = new Vue({
+		el: '#app-7',
+		data: {
+			groceryList: [
+    			{ text: 'Vegetables' },
+    			{ text: 'Cheese' },
+		    	{ text: 'Whatever else humans are supposed to eat' }
+		    ]
+		}
+	})
+
+</script>
+</html>
