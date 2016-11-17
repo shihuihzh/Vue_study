@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+	.b-red {
+		background-color: #ff0000
+	}
+	.c-blue {
+		color: #0000ff
+	}
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<span v-bind:class="{'b-red':red, 'c-blue':blue}">测试类样式，对象</span>
+		<span v-bind:class="computClass">测试类样式2，对象计算属性</span>
+		<span v-bind:class="classArray">测试类样式3，数组</span>
+		<span v-bind:class="[b_red, c_blue]">测试类样式4，数组</span>
+		<span v-bind:class="[{'b-red':red}, c_blue]">测试类样式5，混合</span>
+	</div>
+	<hr>
+
+	<div id="example2">
+		<span v-bind:style="{'background-color':'#ff0000', 'color':'#0000ff'}">测试样式，对象</span>
+		<span v-bind:style="styleData">测试样式2</span>
+		<span v-bind:style="[styleData]">测试样式3，数组</span>
+	</div>
+	<hr>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+
+// class
+var example = new Vue({
+	el: "#example",
+	data: {
+		red: true,
+		blue: true,
+		b_red: "b-red",
+		c_blue: "c-blue",
+		classArray: ["b-red", "c-blue"] // 样式列表
+	},
+	computed: {
+		// 计算属性
+		computClass: function() { 
+			return {'b-red':this.red, 'c-blue':this.blue};
+		},
+
+	}
+})
+
+// class
+var example2 = new Vue({
+	el: "#example2",
+	data: {
+		styleData:{'background-color':'#ff0000', 'color':'#0000ff'}
+	},
+	computed: {
+		// 计算属性
+		computClass: function() { 
+			return {'b-red':this.red, 'c-blue':this.blue};
+		},
+
+	}
+})
+
+
+
+	
+</script>
+</html>

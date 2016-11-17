@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<div>
+			<input type="text" v-model="message" placeholder="input something">
+			<p>单行文本 {{ message }}</p>
+		</div>
+		<hr>
+
+		<div>
+			<span>多行文本</span>
+			<p style="white-space:pre">{{ message2 }}</p>
+			<br>
+			<textarea v-model="message2"></textarea>
+		</div>
+		<hr>
+
+		<div>
+			<span>复选框</span>
+			<input type="checkbox" id="checkbox" v-model="checkbox">
+			<label for="checkbox">{{ checkbox }}</label>
+			<br>
+			<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+			<label for="jack">Jack</label>
+			<input type="checkbox" id="john" value="John" v-model="checkedNames">
+			<label for="john">John</label>
+			<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+			<label for="mike">Mike</label>
+			<br>
+			<span>Checked names: {{ checkedNames }}</span>
+		</div>
+		<hr>
+
+		<div>
+			<span>单选按钮</span><br>
+			<input type="radio" id="one" value="One" v-model="radio">
+			<label for="one">One</label>
+			<br>
+			<input type="radio" id="two" value="Two" v-model="radio">
+			<label for="two">Two</label>
+			<br>
+			<br>
+			<span>radio names: {{ radio }}</span>
+		</div>
+		<hr>
+
+		<div>
+			<span>单择列表</span><br>
+			<select v-model="selected">
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<span>Selected: {{ selected }}</span>
+		</div>
+		<hr>
+
+		<div>
+			<span>多选列表</span><br>
+			<select v-model="selecteds" multiple>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+			</select>
+			<span>Selected: {{ selecteds }}</span>
+		</div>
+		<hr>
+
+		<div>
+			<span>生成列表</span><br>
+			<select >
+				<option v-for="item in selectList" :value="item.value">{{ item.text }}</option>
+			</select>
+		</div>
+		<hr>
+
+
+		
+	</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+<script type="text/javascript">
+
+// 表单双向绑定
+var example = new Vue({
+	el: "#example",
+	data: {
+		message: '',
+		message2:'',
+		checkbox: true,
+		checkedNames: [],
+		radio: '',
+		selected:'',
+		selecteds:[],
+		selectList: [
+			{text:1, value:1},
+			{text:2, value:2},
+			{text:3, value:3}
+		]
+	}
+})
+
+
+	
+</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<button @click="counter += 1">增加1</button>
+		<p>点击了 {{counter}} 次</p>
+	</div>
+	<hr>
+
+	<div id="example2">
+		<button @click="greet">绑定方法 greet</button>
+		<button @click="hello('zhanhao', $event)">调用方法 hello</button>
+	</div>
+	<hr>
+
+
+</body>
+<script type="text/javascript">
+
+// 简单事件处理，直接在事件上写 js
+var example = new Vue({
+	el: "#example",
+	data: {
+		counter: 0
+	}
+})
+
+// 绑定方法或者调用内联方法
+var example2 = new Vue({
+	el: "#example2",
+	methods: {
+		greet: function(event) {
+			alert(event.target.tagName)
+		},
+		hello: function(val, event) {
+			alert(val);
+			alert(event.target.tagName)
+		}
+	}
+})
+
+// 修饰符
+
+	
+</script>
+</html>

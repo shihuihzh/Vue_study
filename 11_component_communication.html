@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<child message="Hello" my-message="world!"></child>
+		<child message="Hello" :my-message="name"></child>
+	</div>
+	<hr>
+
+	<div id="example2">
+		<check :num="123" :more10="111"></check>
+	</div>
+	<hr>
+
+	<div id="event1">
+		<p>{{ total }}</p>
+		<botton-counter @increment="incrementTotal"></botton-counter>
+		<botton-counter @increment="incrementTotal"></botton-counter>
+	</div>
+	<hr>
+
+	<div id="event2">
+		货币输入:<currency-input v-model="price"></currency-input>
+		结果 {{ price }}
+	</div>
+
+	
+
+</body>
+<script type="text/javascript">
+
+// ======= 传递属性
+Vue.component("child", {
+	// 声明属性
+	props: ['message', "myMessage"],
+
+	// 跟 vm 实例的data属性一样了
+	// html 不区分大小写，中横线自动转驼峰
+	template: '<div>{{ message }} {{ myMessage }}</div>'
+})
+
+var example = new Vue({
+	el: "#example",
+	data: {
+		name: "zhanhao"
+	}
+})
+
+// ==== prop 验证
+Vue.component("check", {
+	// 声明属性
+	props: {
+		num: Number,	// 数字类型需要用 v-bind:num 传递
+		 
+		 // 自定义验证函数
+		more10: {
+		    validator: function (value) {
+		    	return value > 10
+		    }
+		}
+	},
+
+	// 跟 vm 实例的data属性一样了
+	// html 不区分大小写，中横线自动转驼峰
+	template: '<div>{{ num }} === {{ more10 }}</div>'
+})
+
+var example2 = new Vue({
+	el: "#example2",
+	data: {
+		
+	}
+})
+
+// ====== 自定义事件
+Vue.component("botton-counter", {
+	template: '<button v-on:click="increment">{{ counter }}</button>',
+	data: function() {
+		return {counter: 0};
+	},
+	methods: {
+		increment: function() {
+			this.counter += 1
+			this.$emit("increment")
+		}
+	}
+})
+
+new Vue({
+	el: '#event1',
+	data: {
+		total: 0
+	},
+	methods: {
+		incrementTotal: function() {
+			this.total += 1
+		}
+	}
+})
+
+
+// ==== 组件绑定
+Vue.component("currency-input", {
+	template: '<span>$ <input ref="input" v-bind:value="value" v-on:input="updateValue($event.target.value)"></input></span>',
+	props: ["value"],
+	methods: {
+		updateValue: function(value) {
+			var formattedValue = value
+	        // Remove whitespace on either side
+	        .trim()
+	        // Shorten to 2 decimal places
+	        .slice(0, value.indexOf('.') + 3)
+	      // If the value was not already normalized,
+	      // manually override it to conform
+	      if (formattedValue !== value) {
+	        this.$refs.input.value = formattedValue
+	      }
+	      // Emit the number value through the input event
+	      this.$emit('input', Number(formattedValue))
+		}
+	}
+});
+
+new Vue({
+	el: '#event2',
+	data: {
+		price: 0
+	}
+})
+
+// === 非父子通讯
+var bus = new Vue();
+
+bus.$on('hi', function(val) { // 监听
+	alert(val);
+})
+
+bus.$emit("hi", "zhannhao"); // 发射事件
+
+
+
+
+	
+</script>
+</html>

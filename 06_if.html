@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<span v-if="singleIf">单元数的条件渲染</span>
+		<template v-if="mutiIf">
+			<span>多行条件渲染</span>
+			<span>多行条件渲染</span>
+			<span>多行条件渲染</span>
+		</template>
+
+		<span v-show="show">简单的 display 切换</span>
+		
+	</div>
+	<hr>
+
+</body>
+<script type="text/javascript">
+
+// if & else & show
+var example = new Vue({
+	el: "#example",
+	data: {
+		singleIf: true,	// 单元素
+		mutiIf: true,	// 多元素行
+		show: true		// 简单 display 切换
+	}
+})
+
+
+
+
+
+	
+</script>
+</html>
