@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="async">
+		<async-example></async-example>
+	</div>
+	<hr>
+
+	<div id="recursive">
+		<stack-overflow></stack-overflow>
+	</div>
+	<hr>
+
+
+	<div id="xtemp">
+		<hello-world></hello-world>
+	</div>
+	<hr>
+
+</body>
+
+<!-- 模板块 -->
+<script type="text/x-template" id="hello-world-template">
+	<p>Hello World!</p>
+</script>
+
+<script type="text/javascript">
+
+// ==== 异步组件
+Vue.component('async-example', function(resolve, reject) {
+	// 一秒后加载组件内容
+	setTimeout(function() {
+		// resolve 加载内容
+		resolve({
+	      template: '<div>I am async!</div>'
+	    })
+	}, 1000);
+
+	// 加载失败 reject(reason) 方法指示失败可以返回加载失败原因
+})
+
+var async = new Vue({
+	el: "#async",
+	data: {
+	}
+})
+
+// ====== 递归组件
+Vue.component('stack-overflow', {
+	data: function() {
+		return {recursive:false}
+	},
+	template: '<div><stack-overflow v-if="recursive"></stack-overflow></div>'
+});
+
+var recursive = new Vue({
+	el: "#recursive",
+	data: {
+	}
+})
+
+// ====== x-template
+Vue.component('hello-world', {
+  template: '#hello-world-template'// id引用模板块
+})
+
+
+var xtemp = new Vue({
+	el: "#xtemp",
+	data: {
+	}
+})
+
+
+
+	
+</script>
+</html>

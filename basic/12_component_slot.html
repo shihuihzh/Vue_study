@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<parent></parent>	
+		<br>
+		<!-- 没有内容分发，直接显示slot里面的内容 -->
+		<child></child>	
+	</div>
+	<hr>
+
+	<div id="example2">
+		<parent2></parent2>	
+	</div>
+	
+
+</body>
+<script type="text/javascript">
+
+// ======= slot 槽，内容分发
+
+// === 不具名
+Vue.component("parent", {
+	template: '\
+		<div>\
+			<h1>I\'m the parent title</h1>\
+			<child>\
+				<p>This is some original content</p>\
+    			<p>This is some more original content</p>\
+			</child>\
+		</div>\
+	'
+})
+
+Vue.component("child", {
+	template: '\
+		<div>\
+			<h2>I\'m the child title</h2>\
+			<slot>\
+				如果没有分发内容显示我\
+			</slot>\
+		</div>\
+	'
+})
+
+var example = new Vue({
+	el: "#example",
+	data: {
+	}
+})
+
+// === 具名
+Vue.component("parent2", {
+	template: '\
+		<app-layout>\
+		  <h1 slot="header">Here might be a page title</h1>\
+		  <p>A paragraph for the main content.</p>\
+		  <p>And another one.</p>\
+		  <p slot="footer">Here\'s some contact info</p>\
+		</app-layout>\
+	'
+})
+
+Vue.component("app-layout", {
+	template: '\
+		<div class="container">\
+		  <header>\
+		    <slot name="header"></slot>\
+		  </header>\
+		  <main>\
+		    <slot></slot>\
+		  </main>\
+		  <footer>\
+		    <slot name="footer"></slot>\
+		  </footer>\
+		</div>\
+	'
+})
+
+var example2 = new Vue({
+	el: "#example2",
+	data: {
+	}
+})
+
+
+
+
+
+	
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Hello</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<div id="example">
+		<!-- keep-alive 会缓存里面的内容 -->
+		<keep-alive> 
+			<component v-bind:is="currentView"></component>
+		</keep-alive>
+	</div>
+
+</body>
+<script type="text/javascript">
+
+// 动态组件，随时切换组件
+var example = new Vue({
+	el: "#example",
+	data: {
+		currentView: 'home'	// 绑定 component 的名称
+	},
+	// 内部定义组件
+	components: {
+		home: {template:"<div>home</div>"},
+		posts: {template:"<div>posts</div>"},
+		archive: {template:"<div>archive</div>"}
+	}
+})
+
+
+	
+</script>
+</html>
